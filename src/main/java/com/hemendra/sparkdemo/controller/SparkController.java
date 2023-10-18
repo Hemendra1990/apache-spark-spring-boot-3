@@ -36,6 +36,6 @@ public class SparkController {
 
     @GetMapping("/query")
     public Object executeQuery(@RequestParam String sql) {
-        return sparkService.executeQuery(sql).collectAsList().stream().count();
+        return sparkService.executeQueryAndCache(sql).collectAsList().stream().count();
     }
 }
