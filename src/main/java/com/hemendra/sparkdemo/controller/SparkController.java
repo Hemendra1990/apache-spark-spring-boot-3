@@ -2,7 +2,6 @@ package com.hemendra.sparkdemo.controller;
 
 import com.hemendra.sparkdemo.dto.DbPropertiesDto;
 import com.hemendra.sparkdemo.service.SparkService;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

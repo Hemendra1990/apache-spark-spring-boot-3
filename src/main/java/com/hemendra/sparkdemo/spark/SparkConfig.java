@@ -13,8 +13,9 @@ public class SparkConfig {
     public SparkConf sparkConf() {
         SparkConf sparkConf = new SparkConf()
                 .setAppName("Integrate Spring-boot with Apache Spark")
-                .setMaster("local[*]"); //here local mode. And * means you will use as much as you have cores.and in cluster mode you will provide master url here.
-
+                
+                //.setMaster("local[*]"); //here local mode. And * means you will use as much as you have cores.and in cluster mode you will provide master url here.
+                .setMaster("spark://localhost:37077");
         return sparkConf;
     }
 
