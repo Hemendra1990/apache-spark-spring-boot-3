@@ -83,11 +83,15 @@ public class ProductSparkService {
 
     public void saveProduct(Product product) {
         Product savedProduct = productRepo.save(product);
+        Dataset<Row> newProduct = sparkSession.createDataFrame(List.of(savedProduct), Product.class);
 
-        Dataset<Row> products = sparkSession.read().parquet(sparkCacheDir+"/product");
-        products.write().mode("append").format("parquet").save(sparkCacheDir+"/product");
-        products.unionAll(sparkSession.createDataFrame(List.of(savedProduct), Product.class));
-        products.createOrReplaceTempView("product");
+        sparkSession.read()
+                .parquet(sparkCacheDir+"/product")
+                .union(newProduct)
+                .dropDuplicates()
+                .write()
+                .mode("overwrite")
+                .save(sparkCacheDir+"/product");
     }
 
     public List<Product> getAllProducts() {
